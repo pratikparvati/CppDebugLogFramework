@@ -15,6 +15,13 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+ /**
+  * @file test.cpp
+  * @brief single linked list
+  * @author Pratik Parvati (pratikparvati@gmail.com)
+  *
+  */
+
 #include "dbglog.h"
 
 struct slist {
