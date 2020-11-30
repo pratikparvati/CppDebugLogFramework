@@ -55,7 +55,8 @@ enum typelog {
 /**
  * Initialize log Object;
  * This macro should be used inside every function in the projects to track the
- * function call heirarchy; Usage : void someFunc()
+ * function call heirarchy; Usage :
+ *          void someFunc()
  *          {
  *              LOG_INIT();
  *              ....
@@ -175,7 +176,7 @@ enum typelog {
 #endif
 
 /**
- * Macro for printing time logs with debug prints
+ * Macro for printing time logs (in nanoseconds precision) with debug prints
  */
 #define TIMELOG                                                                \
   std::chrono::duration_cast<std::chrono::nanoseconds>(                        \
@@ -207,8 +208,8 @@ static auto start = std::chrono::steady_clock::now();
 
 class log {
 private:
-  std::string m_fname;
-  std::string m_filename;
+  std::string m_fname;                        // function name
+  std::string m_filename;                     // file name
 
 public:
   log(const std::string fname, const std::string filename, unsigned int line);
