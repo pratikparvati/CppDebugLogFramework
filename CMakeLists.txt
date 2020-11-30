@@ -50,3 +50,25 @@ include_directories(include)
 add_executable(dtest ${SOURCELIST})
 
 ############## end of project dtest #######################################
+
+#---------------------------------------------------------------------
+#
+#                 DEMO PROJECT
+#
+#---------------------------------------------------------------------
+project(demo)
+
+file(GLOB SOURCELIST
+    src/dbglog.cpp
+    test/demo.cpp)
+
+#add debug flag
+add_definitions(-Wall -DDBGFLAG)
+
+#include directories
+include_directories(include)
+
+# add source list to the executable
+add_executable(demo ${SOURCELIST})
+
+############## end of project demo #######################################
