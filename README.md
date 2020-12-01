@@ -1,7 +1,7 @@
 # Cpp Debug Framework
 This repository contains the debug framework for your Cpp projects. Nowadays, debugging Cpp program has become a tedious activity when project is too huge for human tracing.
 
-This framework is easily portable to any Cpp project and the debug logs are enabled or disabled using a single debug flag.
+This framework can be easily hooked to any Cpp project and the debug logs are enabled or disabled using a single debug flag.
 
 **Note**: This framework is not thread-safe yet and will be considered as a future work.
 
