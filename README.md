@@ -147,7 +147,7 @@ should print
 ```
 ## Debug Flag
 
-Enable debug flag **DBGFLAG** to complile your cpp code with debug logs
+Enable debug flag **DBGFLAG** to compile your cpp code with debug logs
 
 ```
 $  g++ <files>.cpp  src/dbglog.cpp -Wall -o <exec> -DDBGFLAG 
@@ -163,5 +163,27 @@ The logs are encoded with proper colors; the logs for demo test is attached belo
 
 RED is used for errors logs; BLUE is used for info logs; CYAN is used for debug logs. The timing logs are encoded in GREEN color for easy encoding.
 
+## Library usage
+As a part of this project; the build also generates the static and shared library.
+
+#### Shared library
+
+The shared library *build/libdbglog.so* is generated. Below command are for reference to run the cpp file with shared
+library. Here demo.cpp is used as a cpp file
+
+```
+$ export LD_LIBRARY_PATH=<path to library libdbgtlog.so>
+$ g++ demo.cpp -o demo -DDBGFLAG -L<lib_path>  -ldbglog
+$ ./demo
+```
+#### Static library
+The static library *build/libdbglogStatic.a* is generated. Below command are for reference to run cpp file with static
+library. Here demo.cpp is used as a cpp file
+
+```
+$ export LD_LIBRARY_PATH=<path to library libdbglogStatic.a>
+$ g++ demo.cpp -o demo -DDBGFLAG <path to lib>/libdbglogStatic.a
+$ ./demo
+```
 
 **Please Note** : This framework is tested on Ubuntu 18.04 machine. Please raise a query for a failure in other machines.

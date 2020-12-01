@@ -72,3 +72,54 @@ include_directories(include)
 add_executable(demo ${SOURCELIST})
 
 ############## end of project demo #######################################
+
+
+
+#------------------------------------------------------------------------
+#
+#                  GENERATE SHARED LIBRARY (libdbglog.so)
+#
+#-----------------------------------------------------------------------
+project(sharedLib)
+
+# set build type
+set(CMAKE_BUILD_TYPE Debug)
+
+# add include directory
+include_directories(include)
+
+# add source file/files
+file(GLOB SOURCES src/dbglog.cpp)
+
+# add shared library for the target build
+add_library(dbglog SHARED ${SOURCES})
+
+# path for make install
+install(TARGETS dbglog DESTINATION build/lib)
+
+####################### end of project sharedLib ########################
+
+#------------------------------------------------------------------------
+#
+#               GENERATE STATIC LIBRARY (libdbglogStatic.a)
+#
+#-----------------------------------------------------------------------
+
+project(staticLib)
+
+# set build type
+set(CMAKE_BUILD_TYPE Debug)
+
+# add include directory
+include_directories(include)
+
+# add source file
+file(GLOB SOURCES src/dbglog.cpp)
+
+# add static library for the target build
+add_library(dbglogStatic STATIC ${SOURCES})
+
+# path for make install
+install(TARGETS dbglogStatic DESTINATION build/lib)
+
+##################### end of project staticLib ########################
