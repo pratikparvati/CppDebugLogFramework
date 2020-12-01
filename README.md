@@ -1,4 +1,4 @@
-#Cpp Debug Framework
+# Cpp Debug Framework
 This repository contains the debug framework for your Cpp projects. Nowadays, debugging Cpp program has become a tedious activity when project is too huge for human tracing.
 
 This framework is easily portable to any Cpp project and the debug logs are enabled or disabled using a single debug flag.
@@ -96,7 +96,7 @@ should print
 @179299ns [/home/pratikp/demo.cpp:131](warn) warning log goes here
 @256047ns [/home/pratikp/demo.cpp]   <-- void someFunc()
 ```
-####VDBG
+#### VDBG
 Macro used to print single variable; It gives an easy interface to debug single variable to your cpp file
 
 ```C++
