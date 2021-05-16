@@ -15,7 +15,7 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "../include/dbglog.h"
+#include "../include/dbglog.hpp"
 
 void someFunc() {
   LOG_INIT();

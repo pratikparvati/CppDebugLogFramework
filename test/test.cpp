@@ -22,7 +22,7 @@
   *
   */
 
-#include "dbglog.h"
+#include "dbglog.hpp"
 
 struct slist {
   int data;

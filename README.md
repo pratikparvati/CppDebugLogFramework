@@ -70,10 +70,10 @@ This macro should be used inside every function in the projects to track the fun
 The above code should print
 
 ```
-@31523ns [/home/pratikp/demo.cpp:39]  --> int main()
-@61060ns [/home/pratikp/demo.cpp:21]  --> void someFunc()
-@67409ns [/home/pratikp/demo.cpp]   <-- void someFunc()
-@72335ns [/home/pratikp/demo.cpp]   <-- int main()
+2021-05-16 23:19:41.152 [demo.cpp:39]  --> int main()
+2021-05-16 23:19:41.152 [demo.cpp:21]  --> void someFunc()
+2021-05-16 23:19:41.152 [demo.cpp]   <-- void someFunc()
+2021-05-16 23:19:41.152 [demo.cpp]   <-- int main()
 ```
 #### DLOG
 Macro used to print logs on the debug terminal/console; enum {INFO, ERROR, WARN} can be used to print specific message as shown below
@@ -90,11 +90,11 @@ void someFunc()
 should print
 
 ```
-@64573ns [/home/pratikp/demo.cpp:128]  --> void someFunc()
-@68895ns [/home/pratikp/demo.cpp:129](info) info log goes here
-@110744ns [/home/pratikp/demo.cpp:130](error) error log goes here
-@179299ns [/home/pratikp/demo.cpp:131](warn) warning log goes here
-@256047ns [/home/pratikp/demo.cpp]   <-- void someFunc()
+2021-05-16 23:19:41.172 [demo.cpp:128]  --> void someFunc()
+2021-05-16 23:19:41.172 [demo.cpp:129](INFO) info log goes here
+2021-05-16 23:19:41.172 [demo.cpp:130](ERROR) error log goes here
+2021-05-16 23:19:41.172 [demo.cpp:131](WARN) warning log goes here
+2021-05-16 23:19:41.153 [demo.cpp]   <-- void someFunc()
 ```
 #### VDBG
 Macro used to print single variable; It gives an easy interface to debug single variable to your cpp file
@@ -122,15 +122,15 @@ int main()
 should print
 
 ```
-@27957ns [/home/pratikp/demo.cpp:138]  --> int main()
-@56722ns [/home/pratikp/demo.cpp:128]  --> void someFunc()
-@92547ns [/home/pratikp/demo.cpp:129](info) info log goes here
-@196086ns [/home/pratikp/demo.cpp:130](error) error log goes here
-@275469ns [/home/pratikp/demo.cpp:131](warn) warning log goes here
-@317409ns [/home/pratikp/demo.cpp:134](debug) str = Batman
-@325159ns [/home/pratikp/demo.cpp]   <-- void someFunc()
-@337958ns [/home/pratikp/demo.cpp:143](debug) var = 10
-@345342ns [/home/pratikp/demo.cpp]   <-- int main()
+2021-05-16 23:19:41.192 [demo.cpp:138]  --> int main()
+2021-05-16 23:19:41.192 [demo.cpp:128]  --> void someFunc()
+2021-05-16 23:19:41.192 [demo.cpp:129](INFO) info log goes here
+2021-05-16 23:19:41.192 [demo.cpp:130](ERROR) error log goes here
+2021-05-16 23:19:41.192 [demo.cpp:131](WARN) warning log goes here
+2021-05-16 23:19:41.193 [demo.cpp:134](DEBUG) str = Batman
+2021-05-16 23:19:41.193 [demo.cpp]   <-- void someFunc()
+2021-05-16 23:19:41.193 [demo.cpp:143](DEBUG) var = 10
+2021-05-16 23:19:41.193 [demo.cpp]   <-- int main()
 ```
 #### XDBG
 Macro used to print multiple variables with required message
@@ -143,7 +143,7 @@ XDBG << "var = " << var << " zed = " << zed << std::endl;
 should print
 
 ```
-@331102ns [Log.cpp:142](debug) var = 10 zed = 20
+2021-05-16 23:19:41.205 [Log.cpp:142](debug) var = 10 zed = 20
 ```
 ## Debug Flag
 
@@ -161,7 +161,7 @@ The logs are encoded with proper colors; the logs for demo test is attached belo
 
 ![alt text](color_logs.png "color logs")
 
-RED is used for errors logs; BLUE is used for info logs; CYAN is used for debug logs. The timing logs are encoded in GREEN color for easy encoding.
+RED is used for errors logs; BLUE is used for info logs; CYAN is used for debug logs.
 
 ## Library usage
 As a part of this project; the build also generates the static and shared library.

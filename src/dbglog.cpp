@@ -22,7 +22,7 @@
  * @version 1.0
  */
 
-#include "dbglog.h"
+#include "dbglog.hpp"
 
 /**
  * class log constructor
@@ -33,10 +33,12 @@
  */
 
 log::log(const std::string fname, const std::string filename, unsigned int line)
-    : m_fname(fname), m_filename(filename) {
-  std::cout << GREEN << "@" << std::fixed << TIMELOG << "ns" << RESET << " ["
-            << m_filename << ":" << line << "]"
-            << "  --> " << m_fname << std::endl;
+  : m_fname(fname)
+  , m_filename(filename)
+{
+    std::cout << std::fixed << TIMELOG << RESET << " [" << m_filename << ":"
+              << line << "]" << BOLDWHITE << "  --> " << RESET << m_fname
+              << std::endl;
 }
 
 /**
@@ -47,34 +49,37 @@ log::log(const std::string fname, const std::string filename, unsigned int line)
  * @return None
  */
 
-void log::printDebug(std::string str, typelog type, unsigned int line) {
-  std::clog << GREEN << "@" << std::fixed << TIMELOG << "ns" << RESET << " ["
-            << m_filename << ":" << line << "]";
-  switch (type) {
-  case INFO: {
-    std::clog << BLUE << "(info) " << RESET << str << std::endl;
-    break;
-  }
-  case ERROR: {
-    std::cerr << BOLDRED << "(error) " << RESET << str << std::endl;
-    break;
-  }
-  case WARN: {
-    std::cout << YELLOW << "(warn) " << RESET << str << std::endl;
-    break;
-  }
-  default: {
-    std::cout << std::endl;
-    break;
-  }
-  }
+void
+log::printDebug(std::string str, typelog type, unsigned int line)
+{
+    printMutex.lock();
+    std::clog << TIMELOG << RESET << " [" << m_filename << ":" << line << "]";
+    switch (type) {
+        case INFO: {
+            std::clog << BLUE << "(INFO) " << RESET << str << std::endl;
+            break;
+        }
+        case ERROR: {
+            std::cerr << BOLDRED << "(ERROR) " << RESET << str << std::endl;
+            break;
+        }
+        case WARN: {
+            std::cout << YELLOW << "(WARN) " << RESET << str << std::endl;
+            break;
+        }
+        default: {
+            std::cout << std::endl;
+            break;
+        }
+    }
+    printMutex.unlock();
 }
 
 /**
  * class log destructor
  */
-log::~log() {
-  std::cout << GREEN << "@" << std::fixed << TIMELOG << "ns" << RESET << " ["
-            << m_filename << "]"
-            << "   <-- " << m_fname << std::endl;
+log::~log()
+{
+    std::cout << std::fixed << TIMELOG << RESET << " [" << m_filename << "]"
+              << BOLDWHITE << "   <-- " << RESET << m_fname << std::endl;
 }

@@ -14,11 +14,13 @@ project(cpplist)
 
 # list the source file for the project
 file(GLOB SOURCELIST 
-     src/dbglog.cpp
+     src/*.cpp
      test/cpplist/src/*.cpp)
 
 # add debug flag 
 add_definitions(-Wall -DDBGFLAG)
+
+add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=0)
 
 # include directories
 include_directories(include)
@@ -38,6 +40,7 @@ project(dtest)
 
 file(GLOB SOURCELIST
     src/dbglog.cpp
+    src/Utilities.cpp
     test/test.cpp)
 
 #add debug flag
@@ -60,6 +63,7 @@ project(demo)
 
 file(GLOB SOURCELIST
     src/dbglog.cpp
+    src/Utilities.cpp
     test/demo.cpp)
 
 #add debug flag
@@ -89,7 +93,8 @@ set(CMAKE_BUILD_TYPE Debug)
 include_directories(include)
 
 # add source file/files
-file(GLOB SOURCES src/dbglog.cpp)
+file(GLOB SOURCES src/dbglog.cpp
+                  src/Utilities.cpp)
 
 # add shared library for the target build
 add_library(dbglog SHARED ${SOURCES})
@@ -114,7 +119,9 @@ set(CMAKE_BUILD_TYPE Debug)
 include_directories(include)
 
 # add source file
-file(GLOB SOURCES src/dbglog.cpp)
+file(GLOB SOURCES src/dbglog.cpp
+                  src/Utilities.cpp)
+
 
 # add static library for the target build
 add_library(dbglogStatic STATIC ${SOURCES})

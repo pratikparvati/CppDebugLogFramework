@@ -28,17 +28,24 @@
 #include <ctime>
 #include <iomanip>
 #include <iostream>
+#include <mutex>
+#include <string.h>
 #include <string>
+
+#include "Utilities.hpp"
 
 /**
  * The enumeration for type of debug logs
  */
-enum typelog {
-  DEBUG, /**< debug */
-  INFO,  /**< info */
-  WARN,  /**< warning */
-  ERROR  /**< error */
+enum typelog
+{
+    DEBUG, /**< debug */
+    INFO,  /**< info */
+    WARN,  /**< warning */
+    ERROR  /**< error */
 };
+
+#define __FILENAME__ (strrchr("/" __FILE__, '/') + 1)
 
 /**
  * Debug flag
@@ -77,7 +84,7 @@ enum typelog {
  * @284928ns [Log.cpp]   <-- int main()
  *
  */
-#define LOG_INIT() log debug(__PRETTY_FUNCTION__, __FILE__, __LINE__);
+#define LOG_INIT() log debug(__PRETTY_FUNCTION__, __FILENAME__, __LINE__);
 
 /**
  * Macro used to print logs on the debug terminal/console
@@ -135,9 +142,9 @@ enum typelog {
  *
  */
 #define VDBG(x)                                                                \
-  std::cout << GREEN << "@" << std::fixed << TIMELOG << "ns" << RESET << " ["  \
-            << __FILE__ << ":" << __LINE__ << "]" << CYAN << "(debug) "        \
-            << RESET << #x << " = " << x << std::endl
+    std::cout << TIMELOG << RESET << " [" << __FILENAME__ << ":" << __LINE__   \
+              << "]" << CYAN << "(DEBUG) " << RESET << #x << " = " << x        \
+              << std::endl
 
 /**
  * Macro used to print multiple variables with required string
@@ -150,9 +157,8 @@ enum typelog {
  *
  */
 #define XDBG                                                                   \
-  std::cout << GREEN << "@" << std::fixed << TIMELOG << "ns" << RESET << " ["  \
-            << __FILE__ << ":" << __LINE__ << "]" << CYAN << "(debug) "        \
-            << RESET
+    std::cout << TIMELOG << RESET << " [" << __FILENAME__ << ":" << __LINE__   \
+              << "]" << CYAN << "(DEBUG) " << RESET
 /** @} */
 
 #else
@@ -161,27 +167,24 @@ enum typelog {
  *
  */
 #define LOG_INIT()                                                             \
-  do {                                                                         \
-  } while (0)
+    do {                                                                       \
+    } while (0)
 #define DLOG(type, msg)                                                        \
-  do {                                                                         \
-  } while (0)
+    do {                                                                       \
+    } while (0)
 #define VDBG(x)                                                                \
-  do {                                                                         \
-  } while (0)
+    do {                                                                       \
+    } while (0)
 #define XDBG                                                                   \
-  if (0)                                                                       \
-  std::cerr
+    if (0)                                                                     \
+    std::cerr
 
 #endif
 
 /**
  * Macro for printing time logs (in nanoseconds precision) with debug prints
  */
-#define TIMELOG                                                                \
-  std::chrono::duration_cast<std::chrono::nanoseconds>(                        \
-      std::chrono::steady_clock::now() - start)                                \
-      .count()
+#define TIMELOG Util::getInstance()->getCurrentTimeandDate()
 
 static auto start = std::chrono::steady_clock::now();
 
@@ -206,13 +209,15 @@ static auto start = std::chrono::steady_clock::now();
 #define BOLDWHITE "\033[1m\033[37m"   /* Bold White */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class log {
-private:
-  std::string m_fname;                        // function name
-  std::string m_filename;                     // file name
+class log
+{
+  private:
+    std::string m_fname;    // function name
+    std::string m_filename; // file name
+    std::mutex printMutex;
 
-public:
-  log(const std::string fname, const std::string filename, unsigned int line);
-  void printDebug(std::string str, typelog type, unsigned int line);
-  ~log();
+  public:
+    log(const std::string fname, const std::string filename, unsigned int line);
+    void printDebug(std::string str, typelog type, unsigned int line);
+    ~log();
 };

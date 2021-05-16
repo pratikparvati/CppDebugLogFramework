@@ -1,6 +1,6 @@
 #ifndef _6S096_CPPLIST_H
 #define _6S096_CPPLIST_H
-#include "dbglog.h"
+#include "dbglog.hpp"
 #include <cstddef>
 #include <stdexcept>
 
